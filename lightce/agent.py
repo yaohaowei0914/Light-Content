@@ -7,6 +7,8 @@ from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 import json
 from .config import OPENAI_API_KEY, OPENAI_MODEL, TEMPERATURE
+from .tools.mini_contents import get_text_length, compress_text, analyze_and_compress
+from .tools.get_llm import get_llm_parameters, list_available_models, compare_models
 
 # 定义状态类型
 class AgentState(TypedDict):
@@ -37,7 +39,11 @@ def get_weather(city: str) -> str:
     return f"{city}的天气: 晴天，温度25°C，湿度60%"
 
 # 创建工具列表
-tools = [search_web, calculate, get_weather]
+tools = [
+    search_web, calculate, get_weather, 
+    get_text_length, compress_text, analyze_and_compress,
+    get_llm_parameters, list_available_models, compare_models
+]
 
 def create_llm():
     """创建LLM实例"""
@@ -58,6 +64,12 @@ prompt = ChatPromptTemplate.from_messages([
     - search_web: 搜索网络信息
     - calculate: 计算数学表达式
     - get_weather: 获取天气信息
+    - get_text_length: 获取文本的长度统计信息（字符数、词数、行数等）
+    - compress_text: 根据压缩倍数智能压缩文本内容
+    - analyze_and_compress: 分析文本并压缩的综合工具
+    - get_llm_parameters: 获取LLM模型的参数信息（max_tokens、推理能力、Top-k、Top-p、temperature等）
+    - list_available_models: 列出指定API类型的所有可用模型
+    - compare_models: 比较两个模型的参数
     
     请根据用户的需求选择合适的工具，或者直接回答用户的问题。
     如果用户的问题需要工具帮助，请使用相应的工具。
