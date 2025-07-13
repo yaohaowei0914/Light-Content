@@ -1,0 +1,8 @@
+# OpenAI配置
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-3.5-turbo
+
+# Agent配置
+AGENT_NAME=智能助手
+MAX_ITERATIONS=10
+TEMPERATURE=0.7 
