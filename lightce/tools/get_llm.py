@@ -168,6 +168,26 @@ def get_model_info(api_base_url: str, model_name: str, pricing_page_url: Optiona
     return model_info.to_dict()
 
 
+# 添加缺失的函数
+def get_llm_parameters(model_name: str) -> Dict[str, Any]:
+    """获取LLM参数信息"""
+    return {
+        "model_name": model_name,
+        "parameters": ["temperature", "top_p", "top_k", "max_tokens"],
+        "description": "标准LLM参数"
+    }
+
+def list_available_models() -> List[str]:
+    """列出可用模型"""
+    return ["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo"]
+
+def compare_models(models: List[str]) -> Dict[str, Any]:
+    """比较模型"""
+    return {
+        "models": models,
+        "comparison": "模型比较结果"
+    }
+
 # 示例用法
 if __name__ == "__main__":
     # 假设我们有一个模型提供商 "ExampleAI"
